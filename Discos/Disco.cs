@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DiscoTest
+namespace Discos
 {
-    internal class Disco
+    public class Disco
     {
         public string Name { get; set; }
         public string UrlImagen { get; set; }

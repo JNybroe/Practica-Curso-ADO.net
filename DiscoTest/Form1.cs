@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Discos;
+using Registros;
 
 namespace DiscoTest
 {
@@ -21,7 +23,7 @@ namespace DiscoTest
         private void Form1_Load(object sender, EventArgs e)
         {
             ArchivoDisco disco = new ArchivoDisco();
-            List<Disco> lista = disco.Listar();
+            lista = disco.Listar();
             dataGridView1.DataSource = lista;
             dataGridView1.Columns["UrlImagen"].Visible = false;
         }
@@ -38,7 +40,7 @@ namespace DiscoTest
                 pictureBox1.Load(url);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 pictureBox1.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
             }
