@@ -24,26 +24,33 @@ namespace DiscoTest
         {
             ArchivoDisco disco = new ArchivoDisco();
             lista = disco.Listar();
-            dataGridView1.DataSource = lista;
-            dataGridView1.Columns["UrlImagen"].Visible = false;
+            dgVDiscos.DataSource = lista;
+            dgVDiscos.Columns["UrlImagen"].Visible = false;
+            
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            Disco seleccionado = (Disco)dataGridView1.CurrentRow.DataBoundItem;
+            Disco seleccionado = (Disco)dgVDiscos.CurrentRow.DataBoundItem;
             cargarImagen(seleccionado.UrlImagen);
         }
         private void cargarImagen(string url)
         {
             try
             {
-                pictureBox1.Load(url);
+                pbDiscos.Load(url);
 
             }
             catch (Exception)
             {
-                pictureBox1.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
+                pbDiscos.Load("https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg");
             }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            VentanaAgregar ventanaAgregar = new VentanaAgregar();
+            ventanaAgregar.ShowDialog();
         }
     }
 }

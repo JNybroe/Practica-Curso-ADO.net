@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArchivoDisco.cs" />
+    <Compile Include="ArchivoEstilo.cs" />
+    <Compile Include="ArchivoTipo.cs" />
     <Compile Include="LecturaRegistros.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

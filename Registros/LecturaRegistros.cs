@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Discos;
 
 namespace Registros
 {
@@ -18,7 +19,7 @@ namespace Registros
             get { return lector; }
         }
 
-        public LecturaRegistros(string ruta)
+        public LecturaRegistros(string ruta="")
         {
             conexion = new SqlConnection(ruta);
             cmd = new SqlCommand();
@@ -51,5 +52,22 @@ namespace Registros
                 conexion.Close();
             }
         }
+
+        public void ejecutarAccion()
+        {
+            cmd.Connection = conexion;
+            try
+            {
+                conexion.Open ();
+                cmd.ExecuteNonQuery ();
+
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+          
+        }
+
     }
 }
