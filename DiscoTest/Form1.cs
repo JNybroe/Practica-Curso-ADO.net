@@ -19,14 +19,25 @@ namespace DiscoTest
         {
             InitializeComponent();
         }
+        private void cargar()
+        {
+            try
+            {
+                ArchivoDisco disco = new ArchivoDisco();
+                lista = disco.Listar();
+                dgVDiscos.DataSource = lista;
+                dgVDiscos.Columns["UrlImagen"].Visible = false;
+                //dgVDiscos.Columns["ID"].Visible = false;
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }         
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-            ArchivoDisco disco = new ArchivoDisco();
-            lista = disco.Listar();
-            dgVDiscos.DataSource = lista;
-            dgVDiscos.Columns["UrlImagen"].Visible = false;
-            
+            cargar();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -51,6 +62,17 @@ namespace DiscoTest
         {
             VentanaAgregar ventanaAgregar = new VentanaAgregar();
             ventanaAgregar.ShowDialog();
+            cargar();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Disco seleccionado;
+            seleccionado = (Disco) dgVDiscos.CurrentRow.DataBoundItem;
+
+            VentanaAgregar modificar = new VentanaAgregar(seleccionado);
+            modificar.ShowDialog();
+            cargar();
         }
     }
 }

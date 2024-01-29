@@ -42,6 +42,8 @@
             this.lblTipo = new System.Windows.Forms.Label();
             this.dtpFechaLanzamiento = new System.Windows.Forms.DateTimePicker();
             this.lblFecha = new System.Windows.Forms.Label();
+            this.pBoxAgregar = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxAgregar)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -67,21 +69,21 @@
             this.txtNombre.Location = new System.Drawing.Point(84, 36);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(121, 20);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombre.TabIndex = 0;
             // 
             // txtTracks
             // 
             this.txtTracks.Location = new System.Drawing.Point(84, 72);
             this.txtTracks.Name = "txtTracks";
             this.txtTracks.Size = new System.Drawing.Size(121, 20);
-            this.txtTracks.TabIndex = 4;
+            this.txtTracks.TabIndex = 1;
             // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(34, 278);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 5;
+            this.btnAgregar.TabIndex = 6;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -91,7 +93,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(169, 278);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -101,7 +103,8 @@
             this.txtPortada.Location = new System.Drawing.Point(84, 109);
             this.txtPortada.Name = "txtPortada";
             this.txtPortada.Size = new System.Drawing.Size(121, 20);
-            this.txtPortada.TabIndex = 7;
+            this.txtPortada.TabIndex = 2;
+            this.txtPortada.Leave += new System.EventHandler(this.txtPortada_Leave);
             // 
             // lblPortada
             // 
@@ -119,7 +122,7 @@
             this.cboGenero.Location = new System.Drawing.Point(84, 146);
             this.cboGenero.Name = "cboGenero";
             this.cboGenero.Size = new System.Drawing.Size(121, 21);
-            this.cboGenero.TabIndex = 9;
+            this.cboGenero.TabIndex = 3;
             // 
             // lblGenero
             // 
@@ -137,7 +140,7 @@
             this.cboFormato.Location = new System.Drawing.Point(84, 185);
             this.cboFormato.Name = "cboFormato";
             this.cboFormato.Size = new System.Drawing.Size(121, 21);
-            this.cboFormato.TabIndex = 11;
+            this.cboFormato.TabIndex = 4;
             // 
             // lblTipo
             // 
@@ -153,7 +156,7 @@
             this.dtpFechaLanzamiento.Location = new System.Drawing.Point(102, 225);
             this.dtpFechaLanzamiento.Name = "dtpFechaLanzamiento";
             this.dtpFechaLanzamiento.Size = new System.Drawing.Size(200, 20);
-            this.dtpFechaLanzamiento.TabIndex = 13;
+            this.dtpFechaLanzamiento.TabIndex = 5;
             // 
             // lblFecha
             // 
@@ -164,11 +167,21 @@
             this.lblFecha.TabIndex = 14;
             this.lblFecha.Text = "Fecha de salida:";
             // 
+            // pBoxAgregar
+            // 
+            this.pBoxAgregar.Location = new System.Drawing.Point(305, 39);
+            this.pBoxAgregar.Name = "pBoxAgregar";
+            this.pBoxAgregar.Size = new System.Drawing.Size(183, 167);
+            this.pBoxAgregar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBoxAgregar.TabIndex = 15;
+            this.pBoxAgregar.TabStop = false;
+            // 
             // VentanaAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 313);
+            this.ClientSize = new System.Drawing.Size(521, 313);
+            this.Controls.Add(this.pBoxAgregar);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.dtpFechaLanzamiento);
             this.Controls.Add(this.lblTipo);
@@ -186,6 +199,7 @@
             this.Name = "VentanaAgregar";
             this.Text = "Agregar disco nuevo";
             this.Load += new System.EventHandler(this.VentanaAgregar_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxAgregar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,5 +221,6 @@
         private System.Windows.Forms.Label lblTipo;
         private System.Windows.Forms.DateTimePicker dtpFechaLanzamiento;
         private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.PictureBox pBoxAgregar;
     }
 }

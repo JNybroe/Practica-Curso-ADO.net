@@ -53,6 +53,11 @@ namespace Registros
             }
         }
 
+        public void setearParametro(string parametro, object valor) 
+        {
+            cmd.Parameters.AddWithValue(parametro, valor);
+        }
+
         public void ejecutarAccion()
         {
             cmd.Connection = conexion;
