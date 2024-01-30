@@ -101,5 +101,20 @@ namespace Registros
                 sql.cerrarConexion();
             }
         }
+
+        public void eliminarDiscoFisico(int id)
+        {
+            LecturaRegistros sql = new LecturaRegistros("server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true");
+            try
+            {
+                sql.setConsulta("delete from DISCOS where Id=@Id");
+                sql.setearParametro("@Id", id);
+                sql.ejecutarAccion();
+
+            }catch (Exception ex)
+            {
+                throw ex;
+            }finally { sql.cerrarConexion(); }
+        }
     }
 }

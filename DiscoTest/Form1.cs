@@ -27,7 +27,7 @@ namespace DiscoTest
                 lista = disco.Listar();
                 dgVDiscos.DataSource = lista;
                 dgVDiscos.Columns["UrlImagen"].Visible = false;
-                //dgVDiscos.Columns["ID"].Visible = false;
+                dgVDiscos.Columns["ID"].Visible = false;
 
             }
             catch (Exception ex)
@@ -73,6 +73,26 @@ namespace DiscoTest
             VentanaAgregar modificar = new VentanaAgregar(seleccionado);
             modificar.ShowDialog();
             cargar();
+        }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            ArchivoDisco archivo = new ArchivoDisco();
+            Disco seleccionado;
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("¿Desea eliminar el disco seleccionado?","Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Disco)dgVDiscos.CurrentRow.DataBoundItem;
+                    archivo.eliminarDiscoFisico(seleccionado.ID);
+                    cargar();
+                }      
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }
