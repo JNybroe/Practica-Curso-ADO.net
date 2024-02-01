@@ -31,7 +31,7 @@ namespace DiscoTest
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-            }         
+            }
         }
 
         public void sacarColumnas()
