@@ -116,5 +116,84 @@ namespace Registros
                 throw ex;
             }finally { sql.cerrarConexion(); }
         }
+
+        public List<Disco> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Disco> lista = new List<Disco>();
+            LecturaRegistros sql = new LecturaRegistros("server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true");
+            try
+            {
+                string consulta = "Select D.Id,Titulo, FechaLanzamiento, CantidadCanciones, UrlImagenTapa, E.Descripcion as EstiloMusical,E.Id as IdEstilo, T.Descripcion as Formato, T.Id as IdFormato from DISCOS D, ESTILOS E, TIPOSEDICION T Where D.IdEstilo = E.Id and T.Id = D.IdTipoEdicion and ";
+                switch (campo)
+                {
+                    case "Nombre":
+                        switch (criterio)
+                        {
+                            case "Inicia con ":
+                                consulta += "Titulo like '" + filtro + "%'";
+                                break;
+                            case "Termina con ":
+                                consulta += "Titulo like '%" + filtro + "'";
+                                break;
+                            default:
+                                consulta += "Titulo like '%" + filtro + "%'";
+                                break;
+                        }
+                        break;
+                    case "Año":
+                        switch (criterio)
+                        {
+                            case "Es menor a ":
+                                consulta += "YEAR(FechaLanzamiento) < '" + filtro + "'";
+                                break;
+                            case "Es mayor a ":
+                                consulta += "YEAR(FechaLanzamiento) > '" + filtro + "'";
+                                break;
+                            default:
+                                consulta += "YEAR(FechaLanzamiento) = '" + filtro + "'";
+                                break;
+                        }
+                        break;
+                    default:
+                        switch (criterio)
+                        {
+                            case "Es menor a ":
+                                consulta += "CantidadCanciones < '" + filtro + "'";
+                                break;
+                            case "Es mayor a ":
+                                consulta += "CantidadCanciones > '" + filtro + "'";
+                                break;
+                            default:
+                                consulta += "CantidadCanciones = '" + filtro + "'";
+                                break;
+                        }
+                        break;
+                }
+                sql.setConsulta(consulta);
+                sql.realizarConsulta();
+                while (sql.Lector.Read())
+                {
+                    Disco disco = new Disco();
+                    disco.ID = (int)sql.Lector["Id"];
+                    disco.Name = (string)sql.Lector["Titulo"];
+                    disco.Fecha = (DateTime)sql.Lector["FechaLanzamiento"];
+                    disco.UrlImagen = (string)sql.Lector["UrlImagenTapa"];
+                    disco.Tracks = (int)sql.Lector["CantidadCanciones"];
+                    disco.Genre = new Estilo();
+                    disco.Genre.Id = (int)sql.Lector["IdEstilo"];
+                    disco.Genre.Description = (string)sql.Lector["EstiloMusical"];
+                    disco.Formato = new Estilo();
+                    disco.Formato.Id = (int)sql.Lector["IdFormato"];
+                    disco.Formato.Description = (string)sql.Lector["Formato"];
+                    lista.Add(disco);
+                }
+
+                sql.cerrarConexion();
+                return lista;
+            }catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
