@@ -82,13 +82,13 @@ namespace DiscoTest
         private void btnModificar_Click(object sender, EventArgs e)
         {
             Disco seleccionado;
-            seleccionado = (Disco) dgVDiscos.CurrentRow.DataBoundItem;
+            seleccionado = (Disco)dgVDiscos.CurrentRow.DataBoundItem;
 
             VentanaAgregar modificar = new VentanaAgregar(seleccionado);
             modificar.ShowDialog();
-            cargar();
+            cargar();  
         }
-
+        
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
             ArchivoDisco archivo = new ArchivoDisco();
@@ -148,11 +148,28 @@ namespace DiscoTest
             }
         }
 
+        private bool validarSeleccion()
+        {
+            if (cboCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Debes seleccionar un campo a filtrar","Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+
+            if(cboCriterio.SelectedIndex < 0)
+            {
+                MessageBox.Show("Debes seleccionar un criterio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+            return false;
+        }
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             ArchivoDisco arch = new ArchivoDisco();
             try
             {
+                if (validarSeleccion())
+                    return;
                 string campo = cboCampo.SelectedItem.ToString();
                 string criterio = cboCriterio.SelectedItem.ToString();
                 string filtro = txtBoxFiltro.Text;
@@ -161,6 +178,17 @@ namespace DiscoTest
             catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtBoxFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(cboCampo.SelectedIndex >= 1)
+            {
+                if((e.KeyChar < 48 || e.KeyChar > 54) && e.KeyChar !=8)
+                {
+                    e.Handled = true;
+                }
             }
         }
     }

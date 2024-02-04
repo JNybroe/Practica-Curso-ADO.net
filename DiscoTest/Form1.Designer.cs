@@ -157,6 +157,7 @@
             this.txtBoxFiltro.Name = "txtBoxFiltro";
             this.txtBoxFiltro.Size = new System.Drawing.Size(100, 20);
             this.txtBoxFiltro.TabIndex = 11;
+            this.txtBoxFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxFiltro_KeyPress);
             // 
             // lblCampo
             // 

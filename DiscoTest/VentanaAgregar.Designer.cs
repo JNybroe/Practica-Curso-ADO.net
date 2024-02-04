@@ -43,6 +43,7 @@
             this.dtpFechaLanzamiento = new System.Windows.Forms.DateTimePicker();
             this.lblFecha = new System.Windows.Forms.Label();
             this.pBoxAgregar = new System.Windows.Forms.PictureBox();
+            this.btnAgregarImagen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pBoxAgregar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,6 +78,7 @@
             this.txtTracks.Name = "txtTracks";
             this.txtTracks.Size = new System.Drawing.Size(121, 20);
             this.txtTracks.TabIndex = 1;
+            this.txtTracks.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTracks_KeyPress);
             // 
             // btnAgregar
             // 
@@ -176,11 +178,22 @@
             this.pBoxAgregar.TabIndex = 15;
             this.pBoxAgregar.TabStop = false;
             // 
+            // btnAgregarImagen
+            // 
+            this.btnAgregarImagen.Location = new System.Drawing.Point(211, 109);
+            this.btnAgregarImagen.Name = "btnAgregarImagen";
+            this.btnAgregarImagen.Size = new System.Drawing.Size(19, 20);
+            this.btnAgregarImagen.TabIndex = 16;
+            this.btnAgregarImagen.Text = "+";
+            this.btnAgregarImagen.UseVisualStyleBackColor = true;
+            this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
+            // 
             // VentanaAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(521, 313);
+            this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.pBoxAgregar);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.dtpFechaLanzamiento);
@@ -222,5 +235,6 @@
         private System.Windows.Forms.DateTimePicker dtpFechaLanzamiento;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.PictureBox pBoxAgregar;
+        private System.Windows.Forms.Button btnAgregarImagen;
     }
 }
