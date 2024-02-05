@@ -51,6 +51,19 @@ namespace DiscoTest
 
                 disco.Name = txtNombre.Text;
                 disco.Tracks = int.Parse(txtTracks.Text);
+                if (ofd != null && !(txtPortada.Text.ToLower().Contains("http")))
+                {
+                    if(!(File.Exists(ConfigurationManager.AppSettings["Discos"] + ofd.SafeFileName)))
+                    {
+                        File.Copy(ofd.FileName, ConfigurationManager.AppSettings["Discos"] + ofd.SafeFileName);
+                        txtPortada.Text = ConfigurationManager.AppSettings["Discos"] + ofd.SafeFileName;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya existe un disco con esa portada", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
                 disco.UrlImagen = txtPortada.Text;
                 disco.Genre = (Estilo)cboGenero.SelectedItem;
                 disco.Formato = (Estilo)cboFormato.SelectedItem;
@@ -66,8 +79,8 @@ namespace DiscoTest
                     arch.agregarDisco(disco);
                     MessageBox.Show("Disco agregado");
                 }
-                if(ofd !=null && !(txtPortada.Text.ToLower().Contains("http")))
-                    File.Copy(ofd.FileName, ConfigurationManager.AppSettings["Discos"] + ofd.SafeFileName);
+               
+                    
 
 
                 Close();

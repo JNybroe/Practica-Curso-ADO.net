@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +17,7 @@ namespace DiscoTest
     public partial class Form1 : Form
     {
         private List<Disco> lista;
+        private string imagenEliminar = null;
         public Form1()
         {
             InitializeComponent();
@@ -27,6 +30,11 @@ namespace DiscoTest
                 lista = disco.Listar();
                 dgVDiscos.DataSource = lista;
                 sacarColumnas();
+                if(imagenEliminar != null)
+                {
+                    File.Delete(imagenEliminar);
+                    imagenEliminar = null;
+                }
             }
             catch (Exception ex)
             {
@@ -36,7 +44,7 @@ namespace DiscoTest
 
         public void sacarColumnas()
         {
-            dgVDiscos.Columns["UrlImagen"].Visible = false;
+           dgVDiscos.Columns["UrlImagen"].Visible = false;
             dgVDiscos.Columns["ID"].Visible = false;
         }
 
@@ -91,19 +99,26 @@ namespace DiscoTest
         
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
+            
             ArchivoDisco archivo = new ArchivoDisco();
             Disco seleccionado;
             try
             {
                 DialogResult respuesta = MessageBox.Show("¿Desea eliminar el disco seleccionado?","Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if(respuesta == DialogResult.Yes)
-                {
+                {   
                     seleccionado = (Disco)dgVDiscos.CurrentRow.DataBoundItem;
+                    if (!(seleccionado.UrlImagen.ToLower().Contains("http")))
+                    {
+                        imagenEliminar = seleccionado.UrlImagen;
+                    }
                     archivo.eliminarDiscoFisico(seleccionado.ID);
+                    
                     cargar();
-                }      
 
-            }catch (Exception ex)
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
